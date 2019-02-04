@@ -12,6 +12,7 @@ export default function App() {
   return (
     <div>
       <h1>Hello World</h1>
+      <div id="maps" style={{ width: '100%', height: '650px' }} />
     </div>
   );
 }
