@@ -7,6 +7,7 @@ const Container = styled.div`
   max-width: 980px;
   margin: 12px auto;
   display: flex;
+  flex-flow: row nowrap;
   justify-content: space-around;
 `;
 
