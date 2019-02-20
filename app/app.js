@@ -10,33 +10,33 @@ import '@babel/polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ymaps from 'ymaps';
-// import { ConnectedRouter } from 'connected-react-router/immutable';
+import yandexMaps from 'ymaps';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
 
 const MOUNT_NODE = document.getElementById('app');
-const Ymap = ymaps
+yandexMaps
   .load(
-    'https://api-maps.yandex.ru/2.1/?apikey=2c8941af-3ed9-4dde-8355-5ae57f6dfc92&lang=ru_RU',
+    'https://api-maps.yandex.ru/2.1/?apikey=2c8941af-3ed9-4dde-8355-5ae57f6dfc92&lang=ru_RU&mode=debug',
   )
-  .then(maps => {
-    const map = new maps.Map('maps', {
+  .then(yMap => {
+    const myMap = new yMap.Map('maps', {
       center: [55.76, 37.64],
       zoom: 7,
+      controls: [],
     });
-    return map;
+
+    return {
+      yMap,
+      myMap,
+    };
+  })
+  .catch(error => {
+    console.error(error.message);
   });
 
-export { Ymap };
+console.log(window.ymaps);
 
 ReactDOM.render(<App />, MOUNT_NODE);
-
-// Install ServiceWorker and AppCache in the end since
-// it's not most important operation and if main code fails,
-// we do not want it installed
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install(); // eslint-disable-line global-require
-}
