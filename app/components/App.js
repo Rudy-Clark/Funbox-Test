@@ -7,7 +7,7 @@ const Container = styled.div`
   max-width: 980px;
   margin: 12px auto;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-around;
 `;
 

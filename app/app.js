@@ -14,7 +14,7 @@ import yandexMaps from 'ymaps';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
-import App from 'containers/App';
+import App from 'components/App';
 
 const MOUNT_NODE = document.getElementById('app');
 yandexMaps
