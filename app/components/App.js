@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Map from '../containers/Map';
+import Map from './Map';
 import InputWithRoute from './InputWithRoute';
 
 const Container = styled.div`
