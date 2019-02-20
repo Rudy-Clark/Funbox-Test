@@ -44,7 +44,8 @@ const FormGroup = ({ addRoute }) => {
   let input;
   const onSubmit = e => {
     e.preventDefault();
-    addRoute(input.value);
+    // addRoute(input.value);
+    console.log('onSubmit CLicked!!!!');
   };
   return (
     <Form onSubmit={onSubmit}>
@@ -56,7 +57,7 @@ const FormGroup = ({ addRoute }) => {
           x="0px"
           y="0px"
         >
-          <polygon points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22 " />
+          <polygon points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22" />
         </Icon>
       </Button>
     </Form>
