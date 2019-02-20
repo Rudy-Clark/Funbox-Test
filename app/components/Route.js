@@ -19,9 +19,9 @@ const IconDelete = styled.svg`
 `;
 
 const Route = ({ title, deleteRoute }) => (
-  <LI>
+  <LI onClick={deleteRoute}>
     {title}
-    <IconDelete onCLick={deleteRoute} viewBox="0 0 50 50">
+    <IconDelete viewBox="0 0 50 50">
       <circle style={{ fill: '#D75A4A' }} cx="25" cy="25" r="25" />
       <polyline
         style={{

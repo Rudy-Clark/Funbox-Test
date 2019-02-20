@@ -53,7 +53,7 @@ const FormGroup = ({ addRoute }) => {
       <Button type="submit">
         <Icon
           viewBox="0 0 42 42"
-          style={{ enableBackground: 'new 0 0 42 42;' }}
+          style={{ enableBackground: 'new 0 0 42 42' }}
           x="0px"
           y="0px"
         >

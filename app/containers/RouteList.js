@@ -6,10 +6,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteRoute: dispatch(),
+  deleteRoute: id => dispatch(),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ListRoutes);
