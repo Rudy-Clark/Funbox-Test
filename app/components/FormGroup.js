@@ -5,27 +5,26 @@ import PropTypes from 'prop-types';
 const Form = styled.form`
   margin: 20px auto 12px auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-flow: row nowrap;
   border: 1px solid #e3e3e3;
   padding: 0;
-  height: 40px;
+  height: 32px;
   width: 354px;
+  align-items: center;
 `;
 
 const Input = styled.input`
   border: none;
-  flex-basis: 70%;
-  height: 38px;
+  flex-basis: 95%;
+  height: 32px;
+  margin: 0 12px;
 `;
 
 const Icon = styled.svg`
-  width: 32px;
-  height: 32px;
-  position: absolute;
-  left: -50%;
-  top: -50%;
-  transform: translate(50%, 50%);
+  width: 28px;
+  height: 28px;
+  padding: 3px;
 `;
 
 const Button = styled.button`
@@ -36,8 +35,8 @@ const Button = styled.button`
   padding: 0;
   margin: 0;
   position: relative;
-  flex-basis: 30%;
-  height: 40px;
+  flex-basis: 0%;
+  height: 32px;
 `;
 
 const FormGroup = ({ addRoute }) => {

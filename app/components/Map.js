@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Map = styled.div`
   flex-basis: 45%;
-  height: 750px;
+  height: 320px;
 `;
 
 const MapView = () => <Map id="map" />;

@@ -9,13 +9,18 @@ const LI = styled.li`
   border-radius: 4px;
   color: #fff;
   font-size: 0.875em;
+  margin: 0 0 7px;
+  box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.3);
 `;
 
 const IconDelete = styled.svg`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -12px;
+  right: -27px;
+  width: 26px;
+  height: 22px;
+  cursor: pointer;
 `;
 
 const Route = ({ title, deleteRoute }) => (
