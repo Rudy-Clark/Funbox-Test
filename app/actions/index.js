@@ -1,0 +1,23 @@
+export const ADD_ROUTE = 'ADD_ROUTE';
+export const DELETE_ROUTE = 'DELETE_ROUTE';
+
+export const addRoute = title => ({
+  id: generateId(5),
+  title,
+  type: ADD_ROUTE,
+});
+
+export const deleteRoute = id => ({
+  id,
+  type: DELETE_ROUTE,
+});
+
+// Generate unique id;
+const generateId = length => {
+  const symbols = 'ABCDEFGHKLMNOPRSTQUVXYZWabcdefghklmnoprstquvwxyzw1234567890';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += symbols.charAt(Math.floor(Math.random() * symbols.length));
+  }
+  return result;
+};
