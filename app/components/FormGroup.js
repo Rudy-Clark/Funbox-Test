@@ -43,8 +43,9 @@ const FormGroup = ({ addRoute }) => {
   let input;
   const onSubmit = e => {
     e.preventDefault();
-    // addRoute(input.value);
-    console.log('onSubmit CLicked!!!!');
+    if (!input.value.trim()) return;
+    addRoute(input.value);
+    input.value = '';
   };
   return (
     <Form onSubmit={onSubmit}>
