@@ -9,20 +9,18 @@ const UL = styled.ul`
   padding: 0;
 `;
 
-const ListRoutes = ({ routes, deleteRoute }) => {
-  return (
-    <UL>
-      {routes.map(route => (
-        <Route
-          id={route.id}
-          key={route.id}
-          title={route.title}
-          deleteRoute={() => deleteRoute(route.id)}
-        />
-      ))}
-    </UL>
-  );
-};
+const ListRoutes = ({ routes, deleteRoute }) => (
+  <UL>
+    {routes.map(route => (
+      <Route
+        id={route.id}
+        key={route.id}
+        title={route.title}
+        deleteRoute={() => deleteRoute(route.id)}
+      />
+    ))}
+  </UL>
+);
 
 ListRoutes.propTypes = {
   routes: PropTypes.array.isRequired,

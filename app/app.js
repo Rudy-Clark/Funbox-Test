@@ -44,11 +44,9 @@ yandexMaps
     console.error(error.message);
   });
 
-console.log(window.ymaps);
-
 ReactDOM.render(
-  (<Provider store={store}>
+  <Provider store={store}>
     <App />
-  </Provider>),
+  </Provider>,
   MOUNT_NODE
 );
