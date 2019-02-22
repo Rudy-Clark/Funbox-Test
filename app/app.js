@@ -12,15 +12,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import { mapInit} from './services';
-import 'sanitize.css/sanitize.css';
-
 // Import root app
 import App from 'components/App';
 // Import store reducers
 import store from './store';
 
-mapInit('map', {
+import { mapInit } from './services';
+import 'sanitize.css/sanitize.css';
+
+mapInit('map', 'suggest', {
   center: [55.76, 37.64],
   zoom: 7,
   controls: [],

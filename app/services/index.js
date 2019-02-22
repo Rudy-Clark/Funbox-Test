@@ -5,7 +5,7 @@ let map;
 let MultiRouter;
 let routeColl = [];
 
-function mapInit(idEl, options) {
+function mapInit(idEl, suggestViewElement, options) {
   map = ymaps
     .load(
       'https://api-maps.yandex.ru/2.1/?apikey=2c8941af-3ed9-4dde-8355-5ae57f6dfc92&lang=ru_RU&mode=debug'
@@ -13,7 +13,7 @@ function mapInit(idEl, options) {
     .then(yMap => {
       const cMap = new yMap.Map(idEl, options);
 
-      new yMap.SuggestView('suggest', options);
+      new yMap.SuggestView(suggestViewElement, options);
 
       return {
         yMap,
@@ -27,13 +27,32 @@ function mapInit(idEl, options) {
 
 function addRoute({ id, routeName }) {
   routeColl.push({ id, routeName });
+
+  setPointsRoute(routeColl.map(route => route.routeName));
+
+  return {
+    id,
+    title: routeName,
+  };
+}
+
+function deleteRoute(id) {
+  routeColl = routeColl.filter(route => route.id !== id);
+  if (routeColl.length <= 0) {
+    setPointsRoute([]);
+    return [];
+  }
+  setPointsRoute(routeColl.map(route => route.routeName));
+  return routeColl.map(route => ({ id: route.id, title: route.routeName }));
+}
+
+function setPointsRoute(points) {
   const options = {
     boundsAutoApply: true,
   };
   const routes = {
-    referencePoints: routeColl.map(route => route.routeName),
+    referencePoints: points,
   };
-
   map
     .then(obj => {
       const { yMap, cMap } = obj;
@@ -44,11 +63,6 @@ function addRoute({ id, routeName }) {
     .catch(error => {
       console.error(error.message);
     });
-
-  return {
-    id,
-    title: routeName,
-  };
 }
 
-export { mapInit, addRoute };
+export { mapInit, addRoute, deleteRoute };
