@@ -14,7 +14,7 @@ export const deleteRoute = id => ({
 
 // Generate unique id;
 const generateId = length => {
-  const symbols = 'ABCDEFGHKLMNOPRSTQUVXYZWabcdefghklmnoprstquvwxyzw1234567890';
+  const symbols = 'ABCDEFGHKLMNOPRSTQUVXYZWabcdefghklmnoprstquvxyzw1234567890';
   let result = '';
   for (let i = 0; i < length; i++) {
     result += symbols.charAt(Math.floor(Math.random() * symbols.length));

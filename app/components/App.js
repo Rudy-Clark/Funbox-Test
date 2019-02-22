@@ -11,11 +11,18 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
+const H1 = styled.h1`
+  text-align: center;
+`;
+
 const App = () => (
-  <Container>
-    <InputWithRoute />
-    <Map />
-  </Container>
+  <div>
+    <H1>Funbox Test</H1>
+    <Container>
+      <InputWithRoute />
+      <Map />
+    </Container>
+  </div>
 );
 
 export default App;

@@ -19,6 +19,7 @@ const Input = styled.input`
   flex-basis: 95%;
   height: 32px;
   margin: 0 12px;
+  outline: none;
 `;
 
 const Icon = styled.svg`
