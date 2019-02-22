@@ -46,6 +46,7 @@ function deleteRoute(id) {
   return routeColl.map(route => ({ id: route.id, title: route.routeName }));
 }
 
+// private method
 function setPointsRoute(points) {
   const options = {
     boundsAutoApply: true,
