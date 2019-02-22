@@ -4,13 +4,10 @@ import { addRoute, deleteRoute } from '../services';
 const routes = (state = [], action) => {
   switch (action.type) {
     case ADD_ROUTE:
-      return [
-        ...state,
-        addRoute({
-          id: action.id,
-          routeName: action.title,
-        }),
-      ];
+      return addRoute({
+        id: action.id,
+        routeName: action.routeName,
+      });
     case DELETE_ROUTE:
       return deleteRoute(action.id);
     default:

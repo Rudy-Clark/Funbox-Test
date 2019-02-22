@@ -30,10 +30,7 @@ function addRoute({ id, routeName }) {
 
   setPointsRoute(routeColl.map(route => route.routeName));
 
-  return {
-    id,
-    title: routeName,
-  };
+  return routeColl.slice();
 }
 
 function deleteRoute(id) {
@@ -43,7 +40,7 @@ function deleteRoute(id) {
     return [];
   }
   setPointsRoute(routeColl.map(route => route.routeName));
-  return routeColl.map(route => ({ id: route.id, title: route.routeName }));
+  return routeColl.slice();
 }
 
 // private method
@@ -59,6 +56,7 @@ function setPointsRoute(points) {
       const { yMap, cMap } = obj;
       if (MultiRouter) cMap.geoObjects.remove(MultiRouter);
       MultiRouter = new yMap.multiRouter.MultiRoute(routes, options);
+      MultiRouter.editor.start();
       cMap.geoObjects.add(MultiRouter);
     })
     .catch(error => {

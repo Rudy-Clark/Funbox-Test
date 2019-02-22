@@ -15,7 +15,7 @@ const ListRoutes = ({ routes, deleteRoute }) => (
       <Route
         id={route.id}
         key={route.id}
-        title={route.title}
+        routeName={route.routeName}
         deleteRoute={() => deleteRoute(route.id)}
       />
     ))}

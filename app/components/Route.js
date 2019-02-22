@@ -28,9 +28,9 @@ const Title = styled.p`
   margin: 0;
 `;
 
-const Route = ({ title, deleteRoute }) => (
+const Route = ({ routeName, deleteRoute }) => (
   <LI onClick={deleteRoute}>
-    <Title>{title}</Title>
+    <Title>{routeName}</Title>
     <IconDelete viewBox="0 0 14.098 14.098">
       <path
         style={{ fill: 'rgb(237, 70, 82)' }}
@@ -46,7 +46,7 @@ const Route = ({ title, deleteRoute }) => (
 );
 
 Route.propTypes = {
-  title: PropTypes.string.isRequired,
+  routeName: PropTypes.string.isRequired,
   deleteRoute: PropTypes.func.isRequired,
 };
 
