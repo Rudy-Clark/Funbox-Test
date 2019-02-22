@@ -7,6 +7,7 @@ const LI = styled.li`
   display: flex;
   flex-flow: row nowrap;
   align-items: start;
+  cursor: pointer;
 `;
 
 const IconDelete = styled.svg`
@@ -29,9 +30,9 @@ const Title = styled.p`
 `;
 
 const Route = ({ routeName, deleteRoute }) => (
-  <LI onClick={deleteRoute}>
+  <LI>
     <Title>{routeName}</Title>
-    <IconDelete viewBox="0 0 14.098 14.098">
+    <IconDelete onClick={deleteRoute} viewBox="0 0 14.098 14.098">
       <path
         style={{ fill: 'rgb(237, 70, 82)' }}
         d="M13.198,0H0.901C0.404,0,0,0.403,0,0.9v12.299c0,0.496,0.404,0.9,0.901,0.9h12.298

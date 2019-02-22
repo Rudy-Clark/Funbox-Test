@@ -6,19 +6,15 @@ let MultiRouter;
 let routeColl = [];
 
 function mapInit(idEl, suggestViewElement, options) {
-  map = ymaps
+  ymaps
     .load(
       'https://api-maps.yandex.ru/2.1/?apikey=2c8941af-3ed9-4dde-8355-5ae57f6dfc92&lang=ru_RU&mode=debug'
     )
     .then(yMap => {
-      const cMap = new yMap.Map(idEl, options);
+      map = new yMap.Map(idEl, options);
 
       new yMap.SuggestView(suggestViewElement, options);
 
-      return {
-        yMap,
-        cMap,
-      };
     })
     .catch(error => {
       console.error(error.message);
@@ -35,8 +31,9 @@ function addRoute({ id, routeName }) {
 
 function deleteRoute(id) {
   routeColl = routeColl.filter(route => route.id !== id);
-  if (routeColl.length <= 0) {
-    setPointsRoute([]);
+  console.log(routeColl);
+  if (routeColl.length === 0 && MultiRouter) {
+    ymaps.load().then(api => map.geoObjects.remove(MultiRouter));
     return [];
   }
   setPointsRoute(routeColl.map(route => route.routeName));
@@ -47,17 +44,32 @@ function deleteRoute(id) {
 function setPointsRoute(points) {
   const options = {
     boundsAutoApply: true,
+    wayPointDraggable: true,
   };
   const routes = {
     referencePoints: points,
+    params: {
+      reverseGeocoding: false,
+    },
   };
-  map
-    .then(obj => {
-      const { yMap, cMap } = obj;
-      if (MultiRouter) cMap.geoObjects.remove(MultiRouter);
-      MultiRouter = new yMap.multiRouter.MultiRoute(routes, options);
-      MultiRouter.editor.start();
-      cMap.geoObjects.add(MultiRouter);
+  ymaps
+    .load()
+    .then(api => {
+      if (MultiRouter) {
+        MultiRouter.model.setReferencePoints(points);
+        // MultiRouter.events.add('update', () => {
+        //   let currRoutes = MultiRouter.getRoutes();
+        //   console.log(currRoutes);
+        // });
+        return;
+      }
+      MultiRouter = new api.multiRouter.MultiRoute(routes, options);
+      map.geoObjects.add(MultiRouter);
+      MultiRouter.events.add('boundschange', () => {
+        map.setBounds(MultiRouter.getBounds(), {
+          checkZoomRange: true,
+        });
+      });
     })
     .catch(error => {
       console.error(error.message);
