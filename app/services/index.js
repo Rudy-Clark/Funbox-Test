@@ -31,9 +31,8 @@ function addRoute({ id, routeName }) {
 
 function deleteRoute(id) {
   routeColl = routeColl.filter(route => route.id !== id);
-  console.log(routeColl);
   if (routeColl.length === 0 && MultiRouter) {
-    ymaps.load().then(api => map.geoObjects.remove(MultiRouter));
+    ymaps.load().then(api => MultiRouter.model.destroy());
     return [];
   }
   setPointsRoute(routeColl.map(route => route.routeName));
@@ -57,10 +56,13 @@ function setPointsRoute(points) {
     .then(api => {
       if (MultiRouter) {
         MultiRouter.model.setReferencePoints(points);
-        // MultiRouter.events.add('update', () => {
-        //   let currRoutes = MultiRouter.getRoutes();
-        //   console.log(currRoutes);
-        // });
+        MultiRouter.events.add('update', () => {
+          const currRoutes = MultiRouter.getRoutes();
+          // currRoutes.each(route => {
+          //   route.events.add('pixelboundschange', e => {
+          //   });
+          // });
+        });
         return;
       }
       MultiRouter = new api.multiRouter.MultiRoute(routes, options);
