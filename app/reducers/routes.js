@@ -1,5 +1,5 @@
 import { ADD_ROUTE, DELETE_ROUTE } from '../actions';
-import { addRoute } from '../services';
+import { addRoute, deleteRoute } from '../services';
 
 const routes = (state = [], action) => {
   switch (action.type) {
@@ -11,6 +11,8 @@ const routes = (state = [], action) => {
           routeName: action.title,
         }),
       ];
+    case DELETE_ROUTE:
+      return deleteRoute(action.id);
     default:
       return state;
   }
