@@ -1,14 +1,15 @@
 import { ADD_ROUTE, DELETE_ROUTE } from '../actions';
+import { addRoute } from '../services'
 
 const routes = (state = [], action) => {
   switch (action.type) {
     case ADD_ROUTE:
       return [
         ...state,
-        {
+        addRoute({
           id: action.id,
-          title: action.title,
-        },
+          routeName: action.title,
+        }),
       ];
     default:
       return state;
