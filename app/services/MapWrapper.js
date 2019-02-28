@@ -14,6 +14,7 @@ export default class MapWrapper {
       onload: this.onload,
       onerror: this.onerror,
     };
+
     const commOptions = Object.assign(defaultOptions, options);
     const baseUrl = 'https://api-maps.yandex.ru';
     const params = Object.keys(commOptions)
@@ -65,10 +66,6 @@ export default class MapWrapper {
     return this.map;
   }
 
-  getMap() {
-    return this.map;
-  }
-
   injectMap(idEl, state) {
     this.promise.then(() => {
       const myMap = new this.api.Map(idEl, state);
@@ -79,6 +76,11 @@ export default class MapWrapper {
         },
       );
       myMap.geoObjects.add(this.geoObjects);
+      this.geoObjects.events.add(['add', 'remove'], () =>
+        myMap.setBounds(this.geoObjects.getBounds(), {
+          checkZoomRange: true,
+        })
+      );
       this.setMap(myMap);
     });
   }
