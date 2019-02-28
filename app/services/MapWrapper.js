@@ -72,10 +72,33 @@ export default class MapWrapper {
     return this.getApi().modules.require(...args);
   }
 
-  addGeoObject(geObject) {
+  addGeoObject(geoObject) {
     this.map
       .then(map => {
-        map.geoObjects.add(geObject);
+        map.geoObjects.add(geoObject);
+      })
+      .catch(error => console.error(error.message));
+  }
+
+  getCoords(str) {
+    const geoQuery = new Promise((resolve, reject) => {
+      this.api.geocode(str, { result: 1 }).then(
+        res => {
+          const firstGeoObject = res.geoObjects.get(0);
+          resolve(firstGeoObject.geometry.getCoordinates());
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
+    return geoQuery;
+  }
+
+  removeGeoObject(geoObject) {
+    this.map
+      .then(map => {
+        map.geoObjects.remove(geoObject);
       })
       .catch(error => console.error(error.message));
   }
