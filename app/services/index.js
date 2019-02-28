@@ -4,7 +4,7 @@ import MapWrapper from './MapWrapper';
 // private variables
 const mapWrapper = new MapWrapper();
 // It's ES6 feature not yandex map api
-const routeColl = new Map();
+const routeColl = [];
 function mapInit(idEl, suggestViewElement, options) {
   mapWrapper.load({
     apikey: '2c8941af-3ed9-4dde-8355-5ae57f6dfc92',
@@ -16,14 +16,23 @@ function mapInit(idEl, suggestViewElement, options) {
 }
 
 function addRoute(id, routeName) {
-  const promiseCords = mapWrapper.getCoords(routeName);
+  const promiseCords = mapWrapper.getGeoObject(routeName);
 
-  promiseCords.then(coords => {
+  promiseCords.then(geoObject => {
     mapWrapper
       .modules(['Placemark'])
       .spread(Placemark => {
-        const placemark = new Placemark(coords);
-        routeColl.set(id, placemark);
+        const placemark = new Placemark(
+          geoObject.geometry.getCoordinates(),
+          {
+            iconCaption: geoObject.getAddressLine(),
+            balloonContent: routeName,
+          },
+          {
+            draggable: true,
+          },
+        );
+        routeColl.push({ id, placemark });
         mapWrapper.addGeoObject(placemark);
       })
       .catch(error => console.error(error.message));
@@ -31,10 +40,10 @@ function addRoute(id, routeName) {
 }
 
 function deleteRoute(id) {
-  routeColl.forEach((placemark, key) => {
-    if (routeColl.has(id)) {
-      mapWrapper.removeGeoObject(placemark);
-      routeColl.delete(key);
+  routeColl.forEach((route, ind) => {
+    if (route.id === id) {
+      mapWrapper.removeGeoObject(route.placemark);
+      routeColl.splice(ind, 1);
     }
   });
 }

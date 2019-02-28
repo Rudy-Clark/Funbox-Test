@@ -3,6 +3,7 @@ export default class MapWrapper {
     this.api;
     this.map;
     this.promise;
+    this.geoObjects;
     this.onload = 'yandex_maps_onload';
     this.onerror = 'yandex_maps_onerror';
   }
@@ -59,9 +60,27 @@ export default class MapWrapper {
     return this.api ? this.api : window['ymaps'];
   }
 
-  injectMap(idEl, state) {
-    this.map = this.promise.then(() => new this.api.Map(idEl, state));
+  setMap(map) {
+    this.map = map;
     return this.map;
+  }
+
+  getMap() {
+    return this.map;
+  }
+
+  injectMap(idEl, state) {
+    this.promise.then(() => {
+      const myMap = new this.api.Map(idEl, state);
+      this.geoObjects = new this.api.GeoObjectCollection(
+        {},
+        {
+          preset: 'islands#darkBlueDotIconWithCaption',
+        },
+      );
+      myMap.geoObjects.add(this.geoObjects);
+      this.setMap(myMap);
+    });
   }
 
   SuggestView(ideElement) {
@@ -73,32 +92,30 @@ export default class MapWrapper {
   }
 
   addGeoObject(geoObject) {
-    this.map
-      .then(map => {
-        map.geoObjects.add(geoObject);
+    this.promise
+      .then(() => {
+        this.geoObjects.add(geoObject);
       })
       .catch(error => console.error(error.message));
   }
 
-  getCoords(str) {
-    const geoQuery = new Promise((resolve, reject) => {
+  getGeoObject(str) {
+    return new Promise((resolve, reject) => {
       this.api.geocode(str, { result: 1 }).then(
         res => {
-          const firstGeoObject = res.geoObjects.get(0);
-          resolve(firstGeoObject.geometry.getCoordinates());
+          resolve(res.geoObjects.get(0));
         },
         error => {
           reject(error);
         }
       );
     });
-    return geoQuery;
   }
 
   removeGeoObject(geoObject) {
-    this.map
-      .then(map => {
-        map.geoObjects.remove(geoObject);
+    this.promise
+      .then(() => {
+        this.geoObjects.remove(geoObject);
       })
       .catch(error => console.error(error.message));
   }
