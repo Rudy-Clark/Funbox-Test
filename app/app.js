@@ -22,7 +22,7 @@ import 'sanitize.css/sanitize.css';
 
 mapInit('map', 'suggest', {
   center: [55.76, 37.64],
-  zoom: 7,
+  zoom: 9,
   controls: [],
 });
 
