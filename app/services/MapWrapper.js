@@ -123,7 +123,7 @@ export default class MapWrapper {
       .catch(error => error);
   }
 
-  drawLines(routeColl, update = false) {
+  drawLines(routeColl) {
     if (routeColl.length <= 1) {
       if (this.polyline) {
         this.removeGeoObject(this.polyline);

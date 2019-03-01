@@ -1,4 +1,3 @@
-// import ymaps from 'ymaps';
 import MapWrapper from './MapWrapper';
 
 // private variables
@@ -35,6 +34,18 @@ function addRoute(id, routeName) {
         routeColl.push({ id, placemark });
         mapWrapper.addGeoObject(placemark);
         mapWrapper.drawLines(routeColl.slice());
+        placemark.events.add('drag', e => {
+          const target = e.get('target');
+          const changedRoutesCoords = routeColl.map(route => {
+            if (route.id === id) {
+              route.placemark.geometry.setCoordinates(
+                target.geometry.getCoordinates()
+              );
+            }
+            return route;
+          });
+          mapWrapper.drawLines(changedRoutesCoords);
+        });
       })
       .catch(error => console.error(error.message));
   });
@@ -43,12 +54,12 @@ function addRoute(id, routeName) {
 function deleteRoute(id) {
   routeColl.forEach((route, ind) => {
     if (route.id === id) {
-      let last = routeColl.length > 1 ? false : true;
-      mapWrapper.removeGeoObject(route.placemark, last);
+      mapWrapper.removeGeoObject(route.placemark);
       routeColl.splice(ind, 1);
       mapWrapper.drawLines(routeColl);
     }
   });
 }
+
 
 export { mapInit, addRoute, deleteRoute };
