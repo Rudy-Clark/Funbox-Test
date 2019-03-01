@@ -27,6 +27,8 @@ const Title = styled.p`
   color: #fff;
   font-size: 0.975em;
   margin: 0;
+  word-break: break-all;
+  overflow: hidden;
 `;
 
 const Route = ({ routeName, deleteRoute }) => (

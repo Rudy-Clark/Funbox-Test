@@ -34,6 +34,7 @@ function addRoute(id, routeName) {
         );
         routeColl.push({ id, placemark });
         mapWrapper.addGeoObject(placemark);
+        mapWrapper.drawLines(routeColl.slice());
       })
       .catch(error => console.error(error.message));
   });
@@ -42,8 +43,10 @@ function addRoute(id, routeName) {
 function deleteRoute(id) {
   routeColl.forEach((route, ind) => {
     if (route.id === id) {
-      mapWrapper.removeGeoObject(route.placemark);
+      let last = routeColl.length > 1 ? false : true;
+      mapWrapper.removeGeoObject(route.placemark, last);
       routeColl.splice(ind, 1);
+      mapWrapper.drawLines(routeColl);
     }
   });
 }

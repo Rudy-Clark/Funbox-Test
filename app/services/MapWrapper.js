@@ -1,9 +1,10 @@
 export default class MapWrapper {
   constructor() {
-    this.api;
-    this.map;
-    this.promise;
-    this.geoObjects;
+    this.api = null;
+    this.map = null;
+    this.promise = null;
+    this.geoObjects = null;
+    this.polyline = null;
     this.onload = 'yandex_maps_onload';
     this.onerror = 'yandex_maps_onerror';
   }
@@ -119,6 +120,27 @@ export default class MapWrapper {
       .then(() => {
         this.geoObjects.remove(geoObject);
       })
-      .catch(error => console.error(error.message));
+      .catch(error => error);
+  }
+
+  drawLines(routeColl, update = false) {
+    if (routeColl.length <= 1) {
+      if (this.polyline) {
+        this.removeGeoObject(this.polyline);
+        this.polyline = null;
+      }
+      return undefined;
+    }
+    const coords = routeColl.map(route =>
+      route.placemark.geometry.getCoordinates()
+    );
+    if (!this.polyline) {
+      this.polyline = new this.api.Polyline(coords);
+      this.addGeoObject(this.polyline);
+    } else {
+      this.polyline.geometry.setCoordinates(coords);
+    }
+
+    return undefined;
   }
 }
