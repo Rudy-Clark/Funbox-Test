@@ -2,7 +2,7 @@
 import MapWrapper from './MapWrapper';
 // Import store for dispatch action update routes
 import store from '../store';
-// import { updateRoute } from '../actions';
+import { updateRoute } from '../actions';
 
 // private variables
 const mapWrapper = new MapWrapper();
@@ -56,11 +56,12 @@ function addRoute(id, routeName) {
           const coords = e.get('target').geometry.getCoordinates();
           const resultPromise = mapWrapper.getGeoObject(coords);
           resultPromise.then(firstGeoObject => {
+            const changedName = firstGeoObject.getAddressLine();
             placemark.properties.set({
               iconCaption: firstGeoObject.getAddressLine(),
-              balloonContent: firstGeoObject.getAddressLine()
+              balloonContent: changedName,
             });
-            store.dispatch();
+            store.dispatch(updateRoute(id, changedName));
           });
         });
       })
