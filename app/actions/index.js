@@ -1,5 +1,6 @@
 export const ADD_ROUTE = 'ADD_ROUTE';
 export const DELETE_ROUTE = 'DELETE_ROUTE';
+export const UPDATE_ROUTE = 'UPDATE_ROUTE';
 
 export const addRoute = routeName => ({
   id: generateId(5),
@@ -10,6 +11,12 @@ export const addRoute = routeName => ({
 export const deleteRoute = id => ({
   id,
   type: DELETE_ROUTE,
+});
+
+export const updateRoute = (id, changedName) => ({
+  id,
+  changedName,
+  type: UPDATE_ROUTE,
 });
 
 // Generate unique id;
