@@ -1,4 +1,8 @@
+// Helper class for yandexMaps api
 import MapWrapper from './MapWrapper';
+// Import store for dispatch action update routes
+import store from '../store';
+// import { updateRoute } from '../actions';
 
 // private variables
 const mapWrapper = new MapWrapper();
@@ -34,6 +38,7 @@ function addRoute(id, routeName) {
         routeColl.push({ id, placemark });
         mapWrapper.addGeoObject(placemark);
         mapWrapper.drawLines(routeColl.slice());
+        // this event redraw lines
         placemark.events.add('drag', e => {
           const target = e.get('target');
           const changedRoutesCoords = routeColl.map(route => {
@@ -45,6 +50,18 @@ function addRoute(id, routeName) {
             return route;
           });
           mapWrapper.drawLines(changedRoutesCoords);
+        });
+        // here dispatching action update after drag end
+        placemark.events.add('dragend', e => {
+          const coords = e.get('target').geometry.getCoordinates();
+          const resultPromise = mapWrapper.getGeoObject(coords);
+          resultPromise.then(firstGeoObject => {
+            placemark.properties.set({
+              iconCaption: firstGeoObject.getAddressLine(),
+              balloonContent: firstGeoObject.getAddressLine()
+            });
+            store.dispatch();
+          });
         });
       })
       .catch(error => console.error(error.message));
@@ -60,6 +77,5 @@ function deleteRoute(id) {
     }
   });
 }
-
 
 export { mapInit, addRoute, deleteRoute };

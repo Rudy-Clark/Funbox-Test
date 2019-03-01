@@ -102,9 +102,9 @@ export default class MapWrapper {
       .catch(error => console.error(error.message));
   }
 
-  getGeoObject(str) {
+  getGeoObject(query) {
     return new Promise((resolve, reject) => {
-      this.api.geocode(str, { result: 1 }).then(
+      this.api.geocode(query, { result: 1 }).then(
         res => {
           resolve(res.geoObjects.get(0));
         },
