@@ -1,6 +1,7 @@
 export const ADD_ROUTE = 'ADD_ROUTE';
 export const DELETE_ROUTE = 'DELETE_ROUTE';
 export const UPDATE_ROUTE = 'UPDATE_ROUTE';
+export const ROUTE = 'ROUTE';
 
 export const addRoute = routeName => ({
   id: generateId(5),
