@@ -1,4 +1,4 @@
-import { ADD_ROUTE, DELETE_ROUTE, UPDATE_ROUTE } from '../actions';
+import { ADD_ROUTE, DELETE_ROUTE, UPDATE_ROUTE, MOVE_ROUTE } from '../actions';
 import { addRoute, deleteRoute } from '../services';
 
 const routes = (state = [], action) => {
@@ -20,6 +20,15 @@ const routes = (state = [], action) => {
         if (route.id === action.id) route.routeName = action.changedName;
         return route;
       });
+    case MOVE_ROUTE:
+      if (action.from === action.to) return state;
+      let newState = state.slice();
+      let spliced = newState.splice(action.from, 1);
+      state.map((route, idx) => {
+        if (idx === action.to) newState.splice(idx, 0, spliced[0]);
+        return route;
+      });
+      return newState;
     default:
       return state;
   }

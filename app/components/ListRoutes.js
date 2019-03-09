@@ -11,14 +11,16 @@ const UL = styled.ul`
   padding: 0;
 `;
 
-const ListRoutes = ({ routes, deleteRoute }) => (
+const ListRoutes = ({ routes, deleteRoute, moveRoute }) => (
   <UL>
-    {routes.map(route => (
+    {routes.map((route, idx) => (
       <Route
         id={route.id}
         key={route.id}
         routeName={route.routeName}
+        moveRoute={moveRoute}
         deleteRoute={() => deleteRoute(route.id)}
+        orderN={idx}
       />
     ))}
   </UL>
@@ -27,6 +29,7 @@ const ListRoutes = ({ routes, deleteRoute }) => (
 ListRoutes.propTypes = {
   routes: PropTypes.array.isRequired,
   deleteRoute: PropTypes.func.isRequired,
+  moveRoute: PropTypes.func.isRequired,
 };
 
 export default DragDropContext(HTML5Backend)(ListRoutes);

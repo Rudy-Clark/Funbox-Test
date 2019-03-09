@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
+import { findDOMNode } from 'react-dom';
 import { ROUTE } from '../actions';
 
 const RouteCont = styled.div`
@@ -49,7 +50,6 @@ const Route = ({
   isDragging,
   connectDragSource,
   connectDropTarget,
-  isOver
 }) =>
   connectDragSource(
     connectDropTarget(
@@ -74,7 +74,7 @@ const Route = ({
   );
 const routeSource = {
   beginDrag(props) {
-    return { id: props.id };
+    return { orderN: props.orderN };
   }
 };
 
@@ -83,8 +83,11 @@ const routeTarget = {
     return {};
   },
   hover(props, monitor) {
-    const dragId = monitor.getItem().id;
-    console.log(dragId);
+    const from = monitor.getItem().orderN;
+    const to = props.orderN;
+    if (from === to) return;
+    props.moveRoute(from, to);
+    monitor.getItem().orderN = to;
   }
 };
 
@@ -101,6 +104,7 @@ const collectSource = (connect, monitor) => ({
 Route.propTypes = {
   routeName: PropTypes.string.isRequired,
   deleteRoute: PropTypes.func.isRequired,
+  moveRoute: PropTypes.func.isRequired,
 };
 
 export default DropTarget(ROUTE, routeTarget, collectTarget)(
