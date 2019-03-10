@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Map from './Map';
 import InputWithRoute from './InputWithRoute';
-import Card from './Card';
 
 const Container = styled.div`
   max-width: 980px;
@@ -23,7 +22,6 @@ const App = () => (
       <InputWithRoute />
       <Map />
     </Container>
-    <Card />
   </div>
 );
 

@@ -6,7 +6,6 @@ import { updateRoute } from '../actions';
 
 // private variables
 const mapWrapper = new MapWrapper();
-// It's ES6 feature not yandex map api
 const routeColl = [];
 function mapInit(idEl, suggestViewElement, options) {
   mapWrapper.load({
@@ -19,9 +18,9 @@ function mapInit(idEl, suggestViewElement, options) {
 }
 
 function addRoute(id, routeName) {
-  const promiseCords = mapWrapper.getGeoObject(routeName);
+  const promiseGeoObject = mapWrapper.getGeoObject(routeName);
 
-  promiseCords.then(geoObject => {
+  promiseGeoObject.then(geoObject => {
     mapWrapper
       .modules(['Placemark'])
       .spread(Placemark => {
@@ -61,6 +60,7 @@ function addRoute(id, routeName) {
               iconCaption: firstGeoObject.getAddressLine(),
               balloonContent: changedName,
             });
+            // action update;
             store.dispatch(updateRoute(id, changedName));
           });
         });
