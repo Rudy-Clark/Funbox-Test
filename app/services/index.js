@@ -7,6 +7,7 @@ import { updateRoute } from '../actions';
 // private variables
 const mapWrapper = new MapWrapper();
 const routeColl = [];
+
 function mapInit(idEl, suggestViewElement, options) {
   mapWrapper.load({
     apikey: '2c8941af-3ed9-4dde-8355-5ae57f6dfc92',
@@ -69,6 +70,12 @@ function addRoute(id, routeName) {
   });
 }
 
+function swapLines(from, to) {
+  const sliced = routeColl.splice(from, 1);
+  routeColl.splice(to, 0, sliced[0]);
+  mapWrapper.drawLines(routeColl);
+}
+
 function deleteRoute(id) {
   routeColl.forEach((route, ind) => {
     if (route.id === id) {
@@ -79,4 +86,4 @@ function deleteRoute(id) {
   });
 }
 
-export { mapInit, addRoute, deleteRoute };
+export { mapInit, addRoute, deleteRoute, swapLines };

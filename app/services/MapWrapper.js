@@ -135,7 +135,14 @@ export default class MapWrapper {
       route.placemark.geometry.getCoordinates()
     );
     if (!this.polyline) {
-      this.polyline = new this.api.Polyline(coords);
+      this.polyline = new this.api.Polyline(
+        coords,
+        {},
+        {
+          strokeWidth: 3,
+          strokeColor: '#0000FF',
+        },
+      );
       this.addGeoObject(this.polyline);
     } else {
       this.polyline.geometry.setCoordinates(coords);
