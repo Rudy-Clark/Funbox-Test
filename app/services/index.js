@@ -18,56 +18,54 @@ function mapInit(idEl, suggestViewElement, options) {
   mapWrapper.SuggestView(suggestViewElement);
 }
 
-function addRoute(id, routeName) {
-  const promiseGeoObject = mapWrapper.getGeoObject(routeName);
+async function addRoute(id, routeName) {
+  const geoObject = await mapWrapper.getGeoObject(routeName);
 
-  promiseGeoObject.then(geoObject => {
-    mapWrapper
-      .modules(['Placemark'])
-      .spread(Placemark => {
-        const placemark = new Placemark(
-          geoObject.geometry.getCoordinates(),
-          {
-            iconCaption: geoObject.getAddressLine(),
-            balloonContent: routeName,
-          },
-          {
-            draggable: true,
-          },
-        );
-        routeColl.push({ id, placemark });
-        mapWrapper.addGeoObject(placemark);
-        mapWrapper.drawLines(routeColl.slice());
-        // this event redraw lines
-        placemark.events.add('drag', e => {
-          const target = e.get('target');
-          const changedRoutesCoords = routeColl.map(route => {
-            if (route.id === id) {
-              route.placemark.geometry.setCoordinates(
-                target.geometry.getCoordinates()
-              );
-            }
-            return route;
-          });
-          mapWrapper.drawLines(changedRoutesCoords);
+  mapWrapper.modules(['Placemark']).spread(Placemark => {
+    const placemark = new Placemark(
+      geoObject.geometry.getCoordinates(),
+      {
+        iconCaption: geoObject.getAddressLine(),
+        balloonContent: routeName,
+      },
+      {
+        draggable: true,
+      },
+    );
+    routeColl.push({ id, placemark });
+    mapWrapper.addGeoObject(placemark);
+    mapWrapper.drawLines(routeColl.slice());
+    // this event redraw lines
+    placemark.events.add('drag', e => {
+      const target = e.get('target');
+      const changedRoutesCoords = routeColl.map(route => {
+        if (route.id === id) {
+          route.placemark.geometry.setCoordinates(
+            target.geometry.getCoordinates()
+          );
+        }
+        return route;
+      });
+      mapWrapper.drawLines(changedRoutesCoords);
+    });
+    // here dispatching action update after drag end
+    placemark.events.add('dragend', e => {
+      const coords = e.get('target').geometry.getCoordinates();
+      const resultPromise = mapWrapper.getGeoObject(coords);
+      resultPromise.then(firstGeoObject => {
+        const changedName = firstGeoObject.getAddressLine();
+        placemark.properties.set({
+          iconCaption: firstGeoObject.getAddressLine(),
+          balloonContent: changedName,
         });
-        // here dispatching action update after drag end
-        placemark.events.add('dragend', e => {
-          const coords = e.get('target').geometry.getCoordinates();
-          const resultPromise = mapWrapper.getGeoObject(coords);
-          resultPromise.then(firstGeoObject => {
-            const changedName = firstGeoObject.getAddressLine();
-            placemark.properties.set({
-              iconCaption: firstGeoObject.getAddressLine(),
-              balloonContent: changedName,
-            });
-            // action update;
-            store.dispatch(updateRoute(id, changedName));
-          });
-        });
-      })
-      .catch(error => console.error(error.message));
+        // action update;
+        store.dispatch(updateRoute(id, changedName));
+      });
+    });
   });
+  if (!geoObject) return false;
+
+  return true;
 }
 
 function swapLines(from, to) {

@@ -14,6 +14,7 @@ export default class MapWrapper {
     const defaultOptions = {
       onload: this.onload,
       onerror: this.onerror,
+      width: '100%',
     };
 
     const commOptions = Object.assign(defaultOptions, options);
