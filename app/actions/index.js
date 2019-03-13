@@ -24,13 +24,14 @@ export const updateRoute = (id, changedName) => ({
 export const moveRoute = (from, to) => ({
   from,
   to,
-  type: MOVE_ROUTE
+  type: MOVE_ROUTE,
 });
 
 // Generate unique id;
 const generateId = length => {
   const symbols = 'ABCDEFGHKLMNOPRSTQUVXYZWabcdefghklmnoprstquvxyzw1234567890';
   let result = '';
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < length; i++) {
     result += symbols.charAt(Math.floor(Math.random() * symbols.length));
   }

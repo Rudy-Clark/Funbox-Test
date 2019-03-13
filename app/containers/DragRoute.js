@@ -8,7 +8,7 @@ const DragRoute = ({
   deleteRoute,
   isDragging,
   connectDropTarget,
-  connectDragSource
+  connectDragSource,
 }) =>
   connectDragSource(
     connectDropTarget(
@@ -18,14 +18,14 @@ const DragRoute = ({
           deleteRoute={deleteRoute}
           isDragging={isDragging}
         />
-      </li>
-    )
+      </li>,
+    ),
   );
 
 const routeSource = {
   beginDrag(props) {
     return { orderN: props.orderN };
-  }
+  },
 };
 
 const routeTarget = {
@@ -34,20 +34,21 @@ const routeTarget = {
     const to = props.orderN;
     if (from === to) return;
     props.moveRoute(from, to);
+    // eslint-disable-next-line no-param-reassign
     monitor.getItem().orderN = to;
-  }
+  },
 };
 
 const collectTarget = (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver()
+  isOver: monitor.isOver(),
 });
 
 const collectSource = (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 });
 
 export default DropTarget(ROUTE, routeTarget, collectTarget)(
-  DragSource(ROUTE, routeSource, collectSource)(DragRoute)
+  DragSource(ROUTE, routeSource, collectSource)(DragRoute),
 );

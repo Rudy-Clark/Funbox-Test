@@ -41,7 +41,7 @@ async function addRoute(id, routeName) {
       const changedRoutesCoords = routeColl.map(route => {
         if (route.id === id) {
           route.placemark.geometry.setCoordinates(
-            target.geometry.getCoordinates()
+            target.geometry.getCoordinates(),
           );
         }
         return route;

@@ -18,6 +18,7 @@ const routes = (state = [], action) => {
       return state.filter(route => route.id !== action.id);
     case UPDATE_ROUTE:
       return state.map(route => {
+        // eslint-disable-next-line no-param-reassign
         if (route.id === action.id) route.routeName = action.changedName;
         return route;
       });

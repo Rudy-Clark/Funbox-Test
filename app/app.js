@@ -32,5 +32,5 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  MOUNT_NODE
+  MOUNT_NODE,
 );

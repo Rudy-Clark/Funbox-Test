@@ -23,7 +23,7 @@ export default class MapWrapper {
       .map(key => `${key}=${commOptions[key]}`)
       .join('&');
 
-    const url = [baseUrl, version, '?' + params].join('/');
+    const url = [baseUrl, version, `?${params}`].join('/');
     const fetchedScript = new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.onload = resolve;
@@ -60,7 +60,7 @@ export default class MapWrapper {
   }
 
   getApi() {
-    return this.api ? this.api : window['ymaps'];
+    return this.api ? this.api : window.ymaps;
   }
 
   setMap(map) {
@@ -81,7 +81,7 @@ export default class MapWrapper {
       this.geoObjects.events.add(['add', 'remove'], () =>
         myMap.setBounds(this.geoObjects.getBounds(), {
           checkZoomRange: true,
-        })
+        }),
       );
       this.setMap(myMap);
     });
@@ -111,7 +111,7 @@ export default class MapWrapper {
         },
         error => {
           reject(error);
-        }
+        },
       );
     });
   }
@@ -133,7 +133,7 @@ export default class MapWrapper {
       return undefined;
     }
     const coords = routeColl.map(route =>
-      route.placemark.geometry.getCoordinates()
+      route.placemark.geometry.getCoordinates(),
     );
     if (!this.polyline) {
       this.polyline = new this.api.Polyline(

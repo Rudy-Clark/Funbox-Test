@@ -17,5 +17,5 @@ const ListRoutesWithDND = DragDropContext(HTML5Backend)(ListRoutes);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ListRoutesWithDND);
