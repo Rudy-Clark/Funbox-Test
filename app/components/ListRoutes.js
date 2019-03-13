@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import Route from './Route';
+
+import Route from '../containers/DragRoute';
 
 const UL = styled.ul`
   list-style: none;
@@ -32,4 +31,4 @@ ListRoutes.propTypes = {
   moveRoute: PropTypes.func.isRequired,
 };
 
-export default DragDropContext(HTML5Backend)(ListRoutes);
+export default ListRoutes;
