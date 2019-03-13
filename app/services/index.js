@@ -75,6 +75,7 @@ function swapLines(from, to) {
 }
 
 function deleteRoute(id) {
+  if (routeColl.length < 1) return;
   routeColl.forEach((route, ind) => {
     if (route.id === id) {
       mapWrapper.removeGeoObject(route.placemark);

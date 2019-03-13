@@ -5,7 +5,7 @@ const routes = (state = [], action) => {
   let sliced = null;
   switch (action.type) {
     case ADD_ROUTE:
-      if (!addRoute(action.id, action.routeName)) return [];
+      addRoute(action.id, action.routeName);
       return [
         ...state,
         {
