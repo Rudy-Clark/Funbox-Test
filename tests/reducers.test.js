@@ -14,15 +14,19 @@ describe('Test Reducer Routes', () => {
       { id: 'jazz', routeName: 'Bar' },
     ];
     const action = deleteRoute('rap');
-    expect(reducer(state, action)).toEqual([{ id: 'jazz', routeName: 'Bar' }]);
+    expect(reducer(state, action)).toContainEqual({
+      id: 'jazz',
+      routeName: 'Bar',
+    });
   });
 
   it('Add Route', () => {
     const routeName = 'test route';
     const action = addRoute(routeName);
-    expect(reducer([], action)).toEqual([
-      { id: expect.any(String), routeName },
-    ]);
+    expect(reducer([], action)).toContainEqual({
+      id: expect.any(String),
+      routeName,
+    });
   });
 
   it('Update Route', () => {
