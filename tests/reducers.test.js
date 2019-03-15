@@ -14,9 +14,9 @@ describe('Test Reducer Routes', () => {
       { id: 'jazz', routeName: 'Bar' },
     ];
     const action = deleteRoute('rap');
-    expect(reducer(state, action)).toContainEqual({
-      id: 'jazz',
-      routeName: 'Bar',
+    expect(reducer(state, action)).not.toContainEqual({
+      id: 'rap',
+      routeName: 'Foo',
     });
   });
 

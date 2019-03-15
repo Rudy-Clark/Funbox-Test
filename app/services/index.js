@@ -63,7 +63,6 @@ async function addRoute(id, routeName) {
       });
     });
   });
-  if (!geoObject) return false;
 
   return true;
 }
