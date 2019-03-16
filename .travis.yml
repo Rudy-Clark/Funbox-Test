@@ -4,6 +4,12 @@ node_js:
   - 'node'
   - 'lts/*'
 
+deploy:
+  provider: heroku
+  app: "funbox-test-uz"
+  api_key:
+    secure: "57e020ff-0c31-48b2-9e85-49eae6b8f8fb"
+
 script:
   - node ./internals/scripts/generate-templates-for-linting
   - npm test -- --maxWorkers=4
