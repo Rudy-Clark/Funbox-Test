@@ -8,7 +8,8 @@
   },
   "engines": {
     "npm": ">=5",
-    "node": ">=8.10.0"
+    "node": ">=8.10.0",
+    "yarn": ">=1"
   },
   "author": "Rudy Clark",
   "license": "MIT",
