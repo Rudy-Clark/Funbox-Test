@@ -12,6 +12,35 @@ exports[`App App component snapshot 1`] = `
 </div>
 `;
 
+exports[`FormGroup FormGroup snapshot with props 1`] = `
+<FormGroup__Form
+  onSubmit={[Function]}
+>
+  <FormGroup__Input
+    id="suggest"
+    type="text"
+  />
+  <FormGroup__Button
+    type="submit"
+  >
+    <FormGroup__Icon
+      style={
+        Object {
+          "enableBackground": "new 0 0 42 42",
+        }
+      }
+      viewBox="0 0 42 42"
+      x="0px"
+      y="0px"
+    >
+      <polygon
+        points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22"
+      />
+    </FormGroup__Icon>
+  </FormGroup__Button>
+</FormGroup__Form>
+`;
+
 exports[`InputWithRoute InputWithRoute snapshot 1`] = `
 <InputWithRoute__Wrapper>
   <Connect(FormGroup) />
@@ -19,79 +48,12 @@ exports[`InputWithRoute InputWithRoute snapshot 1`] = `
 </InputWithRoute__Wrapper>
 `;
 
-exports[`Map Map component snapshot 1`] = `
-.c0 {
-  -webkit-flex-basis: 45%;
-  -ms-flex-preferred-size: 45%;
-  flex-basis: 45%;
-  height: 320px;
-  width: 100%;
-  margin: 20px 0 0;
-}
+exports[`ListRoutes ListRoutes component snapshot with props 1`] = `<ListRoutes__UL />`;
 
-@media (max-width:760px) {
-  .c0 {
-    -webkit-flex-basis: 85%;
-    -ms-flex-preferred-size: 85%;
-    flex-basis: 85%;
-  }
-}
-
-<MapView>
-  <Map
-    id="map"
-  >
-    <StyledComponent
-      forwardedClass={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "attrs": undefined,
-          "componentStyle": ComponentStyle {
-            "componentId": "Map-sc-16ezmnz-0",
-            "isStatic": true,
-            "lastClassName": "c0",
-            "rules": Array [
-              "flex-basis:45%;height:320px;width:100%;margin:20px 0 0;@media (max-width:760px){flex-basis:85%;}",
-            ],
-          },
-          "displayName": "Map",
-          "render": [Function],
-          "styledComponentId": "Map-sc-16ezmnz-0",
-          "target": "div",
-          "warnTooManyClasses": [Function],
-          "withComponent": [Function],
-        }
-      }
-      forwardedRef={null}
-      id="map"
-    >
-      <div
-        className="c0"
-        id="map"
-      />
-    </StyledComponent>
-  </Map>
-</MapView>
-`;
-
-exports[`Route Route component snapshot 1`] = `
-<Route__RouteCont>
-  <Route__ROUTE>
-    <Route__Title />
-    <Route__IconDelete
-      viewBox="0 0 14.098 14.098"
-    >
-      <path
-        d="M13.198,0H0.901C0.404,0,0,0.403,0,0.9v12.299c0,0.496,0.404,0.9,0.901,0.9h12.298 c0.497,0,0.9-0.404,0.9-0.9V0.901C14.098,0.403,13.694,0,13.198,0z M11.209,9.601l-1.608,1.607c-0.078,0.078-0.202,0.078-0.28,0 L7.049,8.936l-2.272,2.273c-0.078,0.077-0.202,0.077-0.28,0L2.889,9.601c-0.077-0.078-0.077-0.202,0-0.28L5.16,7.049L2.888,4.777 c-0.077-0.078-0.077-0.202,0-0.28l1.608-1.608c0.078-0.078,0.202-0.078,0.28,0l2.272,2.272L9.32,2.889 c0.078-0.078,0.202-0.078,0.28,0l1.607,1.608c0.078,0.078,0.078,0.202,0,0.28l-2.27,2.272l2.272,2.272 C11.286,9.399,11.286,9.523,11.209,9.601z"
-        style={
-          Object {
-            "fill": "rgb(237, 70, 82)",
-          }
-        }
-      />
-    </Route__IconDelete>
-  </Route__ROUTE>
-</Route__RouteCont>
+exports[`Map Map snapshots 1`] = `
+<Map
+  id="map"
+/>
 `;
 
 exports[`Route Route component snapshot with props 1`] = `
