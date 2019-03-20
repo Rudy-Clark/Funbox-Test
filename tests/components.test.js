@@ -3,6 +3,7 @@ import React from 'react';
 import '@babel/polyfill';
 import { mount, shallow } from 'enzyme';
 import 'jest-styled-components';
+
 import Route from '../app/components/Route';
 import Map from '../app/components/Map';
 import App from '../app/components/App';
