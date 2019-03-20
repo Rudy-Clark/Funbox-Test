@@ -138,8 +138,6 @@ describe('FormGroup', () => {
     expect(mock.addRoute.mock.calls.length).toBe(1);
     expect(mock.addRoute.mock.calls[0][0]).toBe(value);
   });
-
-
 });
 
 describe('Map', () => {
