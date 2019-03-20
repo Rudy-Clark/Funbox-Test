@@ -129,7 +129,7 @@ describe('FormGroup', () => {
     form.simulate('submit');
     expect(mock.addRoute).toHaveBeenCalled();
     expect(mock.addRoute.mock.calls.length).toBe(1);
-    expect(mock.addRoute.mock.calls[0]).toBe(value);
+    expect(mock.addRoute.mock.calls[0][0]).toBe(value);
   });
 });
 
