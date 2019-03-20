@@ -123,6 +123,12 @@ describe('FormGroup', () => {
     expect(formGroup).toMatchSnapshot();
   });
 
+  it('FormGroup simulate click on empty form', () => {
+    const form = formGroupFull.find('form');
+    form.simulate('submit');
+    expect(mock.addRoute).not.toHaveBeenCalled();
+  });
+
   it('FormGroup check addRoute', () => {
     const value = 'test route';
     const form = formGroupFull.find('form');
@@ -132,6 +138,8 @@ describe('FormGroup', () => {
     expect(mock.addRoute.mock.calls.length).toBe(1);
     expect(mock.addRoute.mock.calls[0][0]).toBe(value);
   });
+
+
 });
 
 describe('Map', () => {
