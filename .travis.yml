@@ -4,15 +4,16 @@ node_js:
   - 'node'
   - 'lts/*'
 
-deploy:
+script:
+  - npm test -- --maxWorkers=4
+  - npm run build
+
+  deploy:
   provider: heroku
   app: "funbox-test-uz"
   api_key:
     secure: "57e020ff-0c31-48b2-9e85-49eae6b8f8fb"
 
-script:
-  - npm test -- --maxWorkers=4
-  - npm run build
 
 before_install:
   - export CHROME_BIN=chromium-browser
