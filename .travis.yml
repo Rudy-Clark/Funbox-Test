@@ -12,7 +12,7 @@ script:
   provider: heroku
   app: "funbox-test-uz"
   api_key:
-    secure: "57e020ff-0c31-48b2-9e85-49eae6b8f8fb"
+    secure: "abb871c6-2649-404f-be9e-6bf05b25c0d3"
 
 
 before_install:
