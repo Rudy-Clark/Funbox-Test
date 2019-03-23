@@ -1,4 +1,4 @@
-/* eslint-disable prefer-const */
+/* eslint-disable prefer-const no-unused-vars */
 import React from 'react';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
@@ -9,14 +9,13 @@ import Form from '../app/containers/Form';
 import RouteList from '../app/containers/RouteList';
 
 describe('Form', () => {
-  let initialState = {};
   let store;
   // eslint-disable-next-line no-unused-vars
   let form;
   const mockStore = configureStore([]);
 
   beforeEach(() => {
-    store = mockStore(initialState);
+    store = mockStore({});
     form = mount(
       <Provider store={store}>
         <Form />
@@ -37,7 +36,7 @@ describe('Form', () => {
 });
 
 describe('RouteList', () => {
-  let initialState = [
+  const initialState = [
     { id: 'pop', routeName: 'sweet dreams' },
     { id: 'rap', routeName: 'candy shop' },
   ];

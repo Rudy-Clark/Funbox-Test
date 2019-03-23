@@ -49,6 +49,9 @@ const collectSource = (connect, monitor) => ({
   isDragging: monitor.isDragging(),
 });
 
-export default DropTarget(ROUTE, routeTarget, collectTarget)(
-  DragSource(ROUTE, routeSource, collectSource)(DragRoute),
+// source export for unit testing
+export const RouteDragSource = DragSource(ROUTE, routeSource, collectSource)(
+  DragRoute,
 );
+
+export default DropTarget(ROUTE, routeTarget, collectTarget)(RouteDragSource);
