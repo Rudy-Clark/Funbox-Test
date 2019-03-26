@@ -3,9 +3,12 @@ export const DELETE_ROUTE = 'DELETE_ROUTE';
 export const UPDATE_ROUTE = 'UPDATE_ROUTE';
 export const MOVE_ROUTE = 'MOVE_ROUTE';
 export const ROUTE = 'ROUTE';
+export const REQUEST = 'REQUEST';
+export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
+export const REQUEST_ERROR = 'REQUEST_ERROR';
 
-export const addRoute = routeName => ({
-  id: generateId(5),
+export const addRoute = (routeName, id = generateId(5)) => ({
+  id,
   routeName,
   type: ADD_ROUTE,
 });
