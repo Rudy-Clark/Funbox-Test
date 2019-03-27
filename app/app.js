@@ -17,14 +17,7 @@ import App from 'components/App';
 // Import store reducers
 import store from './store';
 
-import { mapInit } from './services';
 import 'sanitize.css/sanitize.css';
-
-mapInit('map', 'suggest', {
-  center: [55.76, 37.64],
-  zoom: 9,
-  controls: [],
-});
 
 const MOUNT_NODE = document.getElementById('app');
 

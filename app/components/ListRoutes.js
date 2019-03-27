@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Route from '../containers/DragRoute';
 import gif from '../images/25.gif';
+
 const UL = styled.ul`
   list-style: none;
   margin: 18px 0 0;

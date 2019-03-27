@@ -15,12 +15,20 @@ const H1 = styled.h1`
   text-align: center;
 `;
 
+const options = {
+  center: [55.76, 37.64],
+  zoom: 9,
+  controls: [],
+};
+
+const suggestView = 'suggest';
+
 const App = () => (
   <div>
     <H1>Funbox Test</H1>
     <Container>
       <InputWithRoute />
-      <Map />
+      <Map options={options} suggestView={suggestView} />
     </Container>
   </div>
 );
