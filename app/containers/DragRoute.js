@@ -4,6 +4,7 @@ import { ROUTE } from '../actions';
 import Route from '../components/Route';
 
 const DragRoute = ({
+  id,
   routeName,
   deleteRoute,
   isDragging,
@@ -14,6 +15,7 @@ const DragRoute = ({
     connectDropTarget(
       <li>
         <Route
+          id={id}
           routeName={routeName}
           deleteRoute={deleteRoute}
           isDragging={isDragging}

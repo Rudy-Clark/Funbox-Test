@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import mapManage from '../services/yandex-map';
 
 const RouteCont = styled.div`
   margin: 0 0 7px;
@@ -44,11 +45,22 @@ const Title = styled.p`
   overflow: hidden;
 `;
 
-const Route = ({ routeName, deleteRoute, isDragging }) => (
+const deletePoint = (id, deleteRoute) => {
+  function handleClick() {
+    mapManage.deletePlaceMark(id);
+    deleteRoute(id);
+  }
+  return handleClick;
+};
+
+const Route = ({ id, routeName, deleteRoute, isDragging }) => (
   <RouteCont>
     <ROUTE isDragging={isDragging}>
       <Title>{routeName}</Title>
-      <IconDelete onClick={deleteRoute} viewBox="0 0 14.098 14.098">
+      <IconDelete
+        onClick={deletePoint(id, deleteRoute)}
+        viewBox="0 0 14.098 14.098"
+      >
         <path
           style={{ fill: 'rgb(237, 70, 82)' }}
           d="M13.198,0H0.901C0.404,0,0,0.403,0,0.9v12.299c0,0.496,0.404,0.9,0.901,0.9h12.298
@@ -68,6 +80,7 @@ Route.propTypes = {
   routeName: PropTypes.string.isRequired,
   deleteRoute: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Route;

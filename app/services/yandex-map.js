@@ -61,6 +61,7 @@ const mapManage = (function() {
     const ymp = await promiseApi();
     return ymp.geocode(query, { result: 1 }).then(res => res.geoObjects.get(0));
   }
+  
   // public methods
   function setApi(ymaps) {
     if (!api) api = ymaps;
@@ -102,11 +103,17 @@ const mapManage = (function() {
     return collection.getLength() - 1;
   }
 
+  function deletePlaceMark(id) {
+    const placemarkInstance = collection.get(id);
+    if (placemarkInstance) collection.remove(placemarkInstance);
+  }
+
   return {
     setApi,
     setGeoCollection,
     searchRouteCoords,
     createPlacemark,
+    deletePlaceMark,
   };
 })();
 

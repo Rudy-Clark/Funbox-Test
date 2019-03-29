@@ -33,7 +33,7 @@ const ListRoutes = ({ routes, deleteRoute, moveRoute, request }) => (
           key={route.id}
           routeName={route.routeName}
           moveRoute={moveRoute}
-          deleteRoute={() => deleteRoute(route.id)}
+          deleteRoute={deleteRoute}
           orderN={idx}
         />
       ))}
