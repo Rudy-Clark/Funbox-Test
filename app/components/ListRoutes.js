@@ -44,7 +44,6 @@ ListRoutes.propTypes = {
   routes: PropTypes.array.isRequired,
   deleteRoute: PropTypes.func.isRequired,
   moveRoute: PropTypes.func.isRequired,
-  request: PropTypes.object.isRequired,
 };
 
 export default ListRoutes;

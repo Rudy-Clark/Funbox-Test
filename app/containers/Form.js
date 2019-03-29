@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import FormGroup from '../components/FormGroup';
-import { addRoute } from '../actions';
+import { requestSearch } from '../sagas/actions';
 
 const mapStateToProps = state => ({
   routes: state.routes,
+  request: state.request,
 });
 
 const mapDispatchToProps = dispatch => ({
-  addRoute: id => dispatch(addRoute(id)),
+  requestSearch: name => dispatch(requestSearch(name)),
 });
 
 export default connect(

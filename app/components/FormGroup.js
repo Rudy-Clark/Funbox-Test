@@ -41,12 +41,12 @@ const Button = styled.button`
   height: 32px;
 `;
 
-const FormGroup = ({ addRoute }) => {
+const FormGroup = ({ requestSearch }) => {
   let input;
   const onSubmit = e => {
     e.preventDefault();
     if (!input.value.trim()) return;
-    addRoute(input.value);
+    requestSearch(input.value);
     input.value = '';
   };
   return (
@@ -67,7 +67,7 @@ const FormGroup = ({ addRoute }) => {
 };
 
 FormGroup.propTypes = {
-  addRoute: PropTypes.func.isRequired,
+  requestSearch: PropTypes.func.isRequired,
 };
 
 export default FormGroup;

@@ -6,7 +6,6 @@ import { deleteRoute, moveRoute } from '../actions';
 
 const mapStateToProps = state => ({
   routes: state.routes,
-  request: state.request,
 });
 
 const mapDispatchToProps = dispatch => ({
