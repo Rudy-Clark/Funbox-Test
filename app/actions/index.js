@@ -30,6 +30,11 @@ export const moveRoute = (from, to) => ({
   type: MOVE_ROUTE,
 });
 
+export const requestError = message => ({
+  type: REQUEST_ERROR,
+  message,
+});
+
 // Generate unique id;
 const generateId = length => {
   const symbols = 'ABCDEFGHKLMNOPRSTQUVXYZWabcdefghklmnoprstquvxyzw1234567890';
