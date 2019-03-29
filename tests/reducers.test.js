@@ -22,9 +22,9 @@ describe('Test Reducer Routes', () => {
 
   it('Add Route', () => {
     const routeName = 'test route';
-    const action = addRoute(routeName);
+    const action = addRoute(routeName, 0);
     expect(reducer([], action)).toContainEqual({
-      id: expect.any(String),
+      id: 0,
       routeName,
     });
   });

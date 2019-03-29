@@ -13,9 +13,9 @@ import {
 describe('Actions', () => {
   it('addRoute()', () => {
     const routeName = 'route 1 test name';
-    const result = addRoute(routeName);
+    const result = addRoute(routeName, 'rap');
     expect(result).toEqual({
-      id: expect.any(String),
+      id: 'rap',
       routeName,
       type: ADD_ROUTE,
     });

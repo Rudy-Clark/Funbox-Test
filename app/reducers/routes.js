@@ -1,11 +1,9 @@
 import { ADD_ROUTE, DELETE_ROUTE, UPDATE_ROUTE, MOVE_ROUTE } from '../actions';
-// import { addRoute, deleteRoute, swapLines } from '../services';
 
 const routes = (state = [], action) => {
   let sliced = null;
   switch (action.type) {
     case ADD_ROUTE:
-      // addRoute(action.id, action.routeName);
       return [
         ...state,
         {
@@ -14,7 +12,6 @@ const routes = (state = [], action) => {
         },
       ];
     case DELETE_ROUTE:
-      // deleteRoute(action.id);
       return state.filter(route => route.id !== action.id);
     case UPDATE_ROUTE:
       return state.map(route => {
@@ -23,7 +20,6 @@ const routes = (state = [], action) => {
         return route;
       });
     case MOVE_ROUTE:
-      // swapLines(action.from, action.to);
       sliced = state.splice(action.from, 1);
       state.splice(action.to, 0, sliced[0]);
       return state.slice();

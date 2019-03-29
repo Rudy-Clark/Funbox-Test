@@ -7,7 +7,7 @@ export const REQUEST = 'REQUEST';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_ERROR = 'REQUEST_ERROR';
 
-export const addRoute = (routeName, id = generateId(5)) => ({
+export const addRoute = (routeName, id) => ({
   id,
   routeName,
   type: ADD_ROUTE,
@@ -34,14 +34,3 @@ export const requestError = message => ({
   type: REQUEST_ERROR,
   message,
 });
-
-// Generate unique id;
-const generateId = length => {
-  const symbols = 'ABCDEFGHKLMNOPRSTQUVXYZWabcdefghklmnoprstquvxyzw1234567890';
-  let result = '';
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < length; i++) {
-    result += symbols.charAt(Math.floor(Math.random() * symbols.length));
-  }
-  return result;
-};

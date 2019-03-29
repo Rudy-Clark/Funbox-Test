@@ -79,36 +79,6 @@ describe('Route', () => {
 });
 
 describe('ListRoutes', () => {
-  const mock = {
-    deleteRoute: id => jest.fn(id),
-    moveRoute: jest.fn(),
-  };
-
-  const routes = [{ id: 'pop', routeName: 'lorem ipsum' }];
-  const listRoutesFull = mount(
-    <ListRoutes
-      deleteRoute={() => mock.deleteRoute('pop')}
-      moveRoute={mock.moveRoute}
-      routes={routes}
-    />,
-  );
-
-  const listRoutes = shallow(
-    <ListRoutes
-      deleteRoute={mock.deleteRoute}
-      moveRoute={mock.moveRoute}
-      routes={[]}
-    />,
-  );
-
-  it('ListRoutes component snapshot with props', () => {
-    expect(listRoutes.exists()).toBe(true);
-    expect(listRoutes).toMatchSnapshot();
-  });
-
-  it('check contains Routes', () => {
-    expect(listRoutesFull.find(DragRoute).length).toBe(1);
-  });
 });
 
 describe('FormGroup', () => {
@@ -116,7 +86,6 @@ describe('FormGroup', () => {
     addRoute: jest.fn(),
   };
   const formGroup = shallow(<FormGroup addRoute={mock.addRoute} />);
-  const formGroupFull = mount(<FormGroup addRoute={mock.addRoute} />);
 
   it('FormGroup snapshot with props', () => {
     expect(formGroup.exists()).toBe(true);
@@ -124,14 +93,14 @@ describe('FormGroup', () => {
   });
 
   it('FormGroup simulate click on empty form', () => {
-    const form = formGroupFull.find('form');
+    const form = formGroup.find('form');
     form.simulate('submit');
     expect(mock.addRoute).not.toHaveBeenCalled();
   });
 
   it('FormGroup check addRoute', () => {
     const value = 'test route';
-    const form = formGroupFull.find('form');
+    const form = formGroup.find('form');
     form.find('input').instance().value = value;
     form.simulate('submit');
     expect(mock.addRoute).toHaveBeenCalled();

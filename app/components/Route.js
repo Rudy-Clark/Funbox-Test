@@ -80,7 +80,7 @@ Route.propTypes = {
   routeName: PropTypes.string.isRequired,
   deleteRoute: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default Route;

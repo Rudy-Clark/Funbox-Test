@@ -2,6 +2,7 @@ import React from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
 import { ROUTE } from '../actions';
 import Route from '../components/Route';
+import mapManage from '../services/yandex-map';
 
 const DragRoute = ({
   id,
@@ -36,6 +37,7 @@ const routeTarget = {
     const to = props.orderN;
     if (from === to) return;
     props.moveRoute(from, to);
+    mapManage.movePlaceMark(from, to);
     // eslint-disable-next-line no-param-reassign
     monitor.getItem().orderN = to;
   },

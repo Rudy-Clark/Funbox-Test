@@ -7,38 +7,21 @@ exports[`App App component snapshot 1`] = `
   </App__H1>
   <App__Container>
     <InputWithRoute />
-    <MapView />
-  </App__Container>
-</div>
-`;
-
-exports[`FormGroup FormGroup snapshot with props 1`] = `
-<FormGroup__Form
-  onSubmit={[Function]}
->
-  <FormGroup__Input
-    id="suggest"
-    type="text"
-  />
-  <FormGroup__Button
-    type="submit"
-  >
-    <FormGroup__Icon
-      style={
+    <MapView
+      options={
         Object {
-          "enableBackground": "new 0 0 42 42",
+          "center": Array [
+            55.76,
+            37.64,
+          ],
+          "controls": Array [],
+          "zoom": 9,
         }
       }
-      viewBox="0 0 42 42"
-      x="0px"
-      y="0px"
-    >
-      <polygon
-        points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22"
-      />
-    </FormGroup__Icon>
-  </FormGroup__Button>
-</FormGroup__Form>
+      suggestView="suggest"
+    />
+  </App__Container>
+</div>
 `;
 
 exports[`InputWithRoute InputWithRoute snapshot 1`] = `
@@ -48,13 +31,7 @@ exports[`InputWithRoute InputWithRoute snapshot 1`] = `
 </InputWithRoute__Wrapper>
 `;
 
-exports[`ListRoutes ListRoutes component snapshot with props 1`] = `<ListRoutes__UL />`;
-
-exports[`Map Map snapshots 1`] = `
-<Map
-  id="map"
-/>
-`;
+exports[`Map Map snapshots 1`] = `<Map />`;
 
 exports[`Route Route component snapshot with props 1`] = `
 <Route__RouteCont>
@@ -65,7 +42,7 @@ exports[`Route Route component snapshot with props 1`] = `
       test
     </Route__Title>
     <Route__IconDelete
-      onClick={[MockFunction]}
+      onClick={[Function]}
       viewBox="0 0 14.098 14.098"
     >
       <path
