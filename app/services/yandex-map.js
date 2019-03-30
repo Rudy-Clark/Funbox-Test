@@ -103,14 +103,9 @@ const mapManage = (function() {
   }
 
   async function searchRouteCoords(query) {
-    let geocode;
-    try {
-      geocode = await getGeoObject(query);
-      if (!geocode.geometry) return false;
-      return geocode.geometry.getCoordinates();
-    } catch (error) {
-      return false;
-    }
+    const geocode = await getGeoObject(query);
+    if (!geocode) throw new Error(`can't find ${query}`);
+    return geocode.geometry.getCoordinates();
   }
 
   async function createPlaceMark(routeName, coords) {

@@ -56,6 +56,7 @@ const ErrorBlock = styled.div`
   max-height: ${props => (props.error ? 'auto' : '0')};
   padding: 2px;
   text-align: center;
+  word-break: break-all;
 `;
 
 const FormGroup = ({ requestSearch, request, resetError }) => {
@@ -66,13 +67,12 @@ const FormGroup = ({ requestSearch, request, resetError }) => {
     requestSearch(input.value);
     input.value = '';
   };
-  const { error } = request;
   return (
-    <Form error={error} onSubmit={onSubmit}>
+    <Form error={request.error} onSubmit={onSubmit}>
       <Input ref={node => (input = node)} id="suggest" type="text" />
       <Button error={request.error} type="submit">
         <Icon
-          error={error}
+          error={request.error}
           viewBox="0 0 42 42"
           style={{ enableBackground: 'new 0 0 42 42' }}
           x="0px"
@@ -81,7 +81,7 @@ const FormGroup = ({ requestSearch, request, resetError }) => {
           <polygon points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22" />
         </Icon>
       </Button>
-      <ErrorBlock onClick={() => resetError()} error={error}>
+      <ErrorBlock onClick={() => resetError()} error={request.error}>
         {request.message}
       </ErrorBlock>
     </Form>

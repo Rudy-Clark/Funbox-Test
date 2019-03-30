@@ -9,12 +9,14 @@ export default function* watchAsyncRequests() {
   yield takeEvery(REQUEST_SEARCH, querySearchGeoObject);
 }
 
-function* querySearchGeoObject(action) {
+export function* querySearchGeoObject(action) {
   yield put({ type: REQUEST });
-  const coords = yield call(() => mapManage.searchRouteCoords(action.route));
-  if (coords.length > 0) {
+  try {
+    const coords = yield call(mapManage.searchRouteCoords, action.route);
     yield put({ type: REQUEST_SUCCESS });
     const id = yield mapManage.createPlaceMark(action.route, coords);
     yield put(addRoute(action.route, id));
-  } else yield put(requestError(`Can't find ${action.route}`));
+  } catch (error) {
+    yield put(requestError(error.message));
+  }
 }
