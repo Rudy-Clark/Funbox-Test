@@ -36,6 +36,7 @@ describe('Route', () => {
   };
   const route = mount(
     <Route
+      id={'"hiphop"'}
       routeName={mock.routeName}
       deleteRoute={mock.deleteRoute}
       isDragging={mock.isDragging}
@@ -43,6 +44,7 @@ describe('Route', () => {
   );
   const routerShallowRender = shallow(
     <Route
+      id={'"hiphop"'}
       routeName={mock.routeName}
       deleteRoute={mock.deleteRoute}
       isDragging={mock.isDragging}
@@ -83,9 +85,26 @@ describe('ListRoutes', () => {
 
 describe('FormGroup', () => {
   const mock = {
-    addRoute: jest.fn(),
+    requestSearch: jest.fn(),
+    request: { error: false, loading: false, message: '' },
+    resetError: jest.fn()
   };
-  const formGroup = shallow(<FormGroup addRoute={mock.addRoute} />);
+
+  const formGroup = shallow(
+    <FormGroup
+      resetError={mock.resetError}
+      request={mock.request}
+      requestSearch={mock.requestSearch}
+    />,
+  );
+
+  const fullFormGroup = mount(
+    <FormGroup
+      resetError={mock.resetError}
+      request={mock.request}
+      requestSearch={mock.requestSearch}
+    />,
+  );
 
   it('FormGroup snapshot with props', () => {
     expect(formGroup.exists()).toBe(true);
@@ -93,25 +112,30 @@ describe('FormGroup', () => {
   });
 
   it('FormGroup simulate click on empty form', () => {
-    const form = formGroup.find('form');
+    const form = fullFormGroup.find('form');
     form.simulate('submit');
-    expect(mock.addRoute).not.toHaveBeenCalled();
+    expect(mock.requestSearch).not.toHaveBeenCalled();
   });
 
   it('FormGroup check addRoute', () => {
     const value = 'test route';
-    const form = formGroup.find('form');
+    const form = fullFormGroup.find('form');
     form.find('input').instance().value = value;
     form.simulate('submit');
-    expect(mock.addRoute).toHaveBeenCalled();
-    expect(mock.addRoute.mock.calls.length).toBe(1);
-    expect(mock.addRoute.mock.calls[0][0]).toBe(value);
+    expect(mock.requestSearch).toHaveBeenCalled();
+    expect(mock.requestSearch.mock.calls.length).toBe(1);
+    expect(mock.requestSearch.mock.calls[0][0]).toBe(value);
   });
 });
 
 describe('Map', () => {
   it('Map snapshots', () => {
-    const map = shallow(<Map />);
+    const options = {
+      center: [55.76, 37.64],
+      zoom: 9,
+      controls: [],
+    };
+    const map = shallow(<Map suggestView={'"suggest"'} options={options} />);
     expect(map.exists()).toBe(true);
     expect(map).toMatchSnapshot();
   });

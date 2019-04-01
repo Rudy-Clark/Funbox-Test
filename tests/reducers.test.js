@@ -1,7 +1,16 @@
 // import reducer routes
 import reducer from '../app/reducers/routes';
+import request from '../app/reducers/requests';
 // import tested actions
-import { addRoute, updateRoute, moveRoute, deleteRoute } from '../app/actions';
+import {
+  addRoute,
+  updateRoute,
+  moveRoute,
+  deleteRoute,
+  requestError,
+  REQUEST,
+  REQUEST_SUCCESS,
+} from '../app/actions';
 
 describe('Test Reducer Routes', () => {
   it('Initial State', () => {
@@ -57,6 +66,42 @@ describe('Test Reducer Routes', () => {
     // eslint-disable-next-line array-callback-return
     state.map((route, idx) => {
       if (idx === to) expect(reducer(state, action)[to]).toEqual(state[idx]);
+    });
+  });
+});
+
+describe('Test request reducer', () => {
+  const initialState = {
+    loading: false,
+    error: false,
+    message: '',
+  };
+
+  it('Initial state', () => {
+    expect(request(initialState, {})).toEqual(initialState);
+  });
+
+  it('REQUEST state', () => {
+    const action = { type: REQUEST };
+    expect(request(initialState, action)).toEqual({
+      loading: true,
+      error: false,
+      message: '',
+    });
+  });
+
+  it('REQUEST SUCCESS state', () => {
+    const action = { type: REQUEST_SUCCESS };
+    expect(request(initialState, action)).toEqual(initialState);
+  });
+
+  it('REQUEST ERROR state', () => {
+    const message = 'Error test';
+    const action = requestError(message);
+    expect(request(initialState, action)).toEqual({
+      loading: false,
+      error: true,
+      message,
     });
   });
 });

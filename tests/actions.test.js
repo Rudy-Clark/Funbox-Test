@@ -9,6 +9,7 @@ import {
   UPDATE_ROUTE,
   MOVE_ROUTE,
 } from '../app/actions';
+import { requestSearch, REQUEST_SEARCH } from '../app/sagas/actions';
 
 describe('Actions', () => {
   it('addRoute()', () => {
@@ -49,6 +50,14 @@ describe('Actions', () => {
       from,
       to,
       type: MOVE_ROUTE,
+    });
+  });
+
+  it('requestSearch() sagas', () => {
+    const route = 'Test search';
+    expect(requestSearch(route)).toEqual({
+      type: REQUEST_SEARCH,
+      route,
     });
   });
 });

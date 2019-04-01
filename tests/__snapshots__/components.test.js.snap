@@ -24,6 +24,42 @@ exports[`App App component snapshot 1`] = `
 </div>
 `;
 
+exports[`FormGroup FormGroup snapshot with props 1`] = `
+<FormGroup__Form
+  error={false}
+  onSubmit={[Function]}
+>
+  <FormGroup__Input
+    id="suggest"
+    type="text"
+  />
+  <FormGroup__Button
+    error={false}
+    type="submit"
+  >
+    <FormGroup__Icon
+      error={false}
+      style={
+        Object {
+          "enableBackground": "new 0 0 42 42",
+        }
+      }
+      viewBox="0 0 42 42"
+      x="0px"
+      y="0px"
+    >
+      <polygon
+        points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22"
+      />
+    </FormGroup__Icon>
+  </FormGroup__Button>
+  <FormGroup__ErrorBlock
+    error={false}
+    onClick={[Function]}
+  />
+</FormGroup__Form>
+`;
+
 exports[`InputWithRoute InputWithRoute snapshot 1`] = `
 <InputWithRoute__Wrapper>
   <Connect(FormGroup) />
