@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import 'regenerator-runtime/runtime';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { REQUEST_SEARCH } from './actions';
@@ -10,8 +9,8 @@ export default function* watchAsyncRequests() {
 }
 
 export function* querySearchGeoObject(action) {
-  yield put({ type: REQUEST });
   try {
+    yield put({ type: REQUEST });
     const coords = yield call(mapManage.searchRouteCoords, action.route);
     yield put({ type: REQUEST_SUCCESS });
     const id = yield mapManage.createPlaceMark(action.route, coords);
