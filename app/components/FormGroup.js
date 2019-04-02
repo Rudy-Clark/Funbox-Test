@@ -53,7 +53,6 @@ const ErrorBlock = styled.div`
   color: #fff;
   transition: all 0.4s;
   display: ${props => (props.error ? 'block' : 'none')};
-  max-height: ${props => (props.error ? 'auto' : '0')};
   padding: 2px;
   text-align: center;
   word-break: break-all;

@@ -8,8 +8,6 @@ import Route from '../app/components/Route';
 import Map from '../app/components/Map';
 import App from '../app/components/App';
 import InputWithRoute from '../app/components/InputWithRoute';
-import ListRoutes from '../app/components/ListRoutes';
-import DragRoute from '../app/containers/DragRoute';
 import FormGroup from '../app/components/FormGroup';
 
 describe('App', () => {
@@ -30,26 +28,13 @@ describe('InputWithRoute', () => {
 
 describe('Route', () => {
   const mock = {
+    id: 'hiphop',
     routeName: 'test',
     deleteRoute: jest.fn(),
     isDragging: false,
   };
-  const route = mount(
-    <Route
-      id={'"hiphop"'}
-      routeName={mock.routeName}
-      deleteRoute={mock.deleteRoute}
-      isDragging={mock.isDragging}
-    />,
-  );
-  const routerShallowRender = shallow(
-    <Route
-      id={'"hiphop"'}
-      routeName={mock.routeName}
-      deleteRoute={mock.deleteRoute}
-      isDragging={mock.isDragging}
-    />,
-  );
+  const route = mount(<Route {...mock} />);
+  const routerShallowRender = shallow(<Route {...mock} />);
   it('Route component snapshot with props', () => {
     expect(routerShallowRender).toMatchSnapshot();
   });
@@ -80,31 +65,15 @@ describe('Route', () => {
   });
 });
 
-describe('ListRoutes', () => {
-});
-
 describe('FormGroup', () => {
   const mock = {
     requestSearch: jest.fn(),
     request: { error: false, loading: false, message: '' },
-    resetError: jest.fn()
+    resetError: jest.fn(),
   };
 
-  const formGroup = shallow(
-    <FormGroup
-      resetError={mock.resetError}
-      request={mock.request}
-      requestSearch={mock.requestSearch}
-    />,
-  );
-
-  const fullFormGroup = mount(
-    <FormGroup
-      resetError={mock.resetError}
-      request={mock.request}
-      requestSearch={mock.requestSearch}
-    />,
-  );
+  const formGroup = shallow(<FormGroup {...mock} />);
+  const fullFormGroup = mount(<FormGroup {...mock} />);
 
   it('FormGroup snapshot with props', () => {
     expect(formGroup.exists()).toBe(true);
@@ -125,6 +94,24 @@ describe('FormGroup', () => {
     expect(mock.requestSearch).toHaveBeenCalled();
     expect(mock.requestSearch.mock.calls.length).toBe(1);
     expect(mock.requestSearch.mock.calls[0][0]).toBe(value);
+  });
+
+  it('FormGroup check resetError', () => {
+    const renderWithError = mount(
+      <FormGroup
+        {...mock}
+        request={{ error: true, loading: false, message: '' }}
+      />,
+    );
+    const errorBlock = renderWithError.find('div');
+    errorBlock.simulate('click');
+    expect(mock.resetError).toHaveBeenCalled();
+    expect(mock.resetError.mock.calls.length).toBe(1);
+    expect(fullFormGroup).toHaveProp({
+      requestSearch: mock.requestSearch,
+      request: { error: false, loading: false, message: '' },
+      resetError: mock.resetError,
+    });
   });
 });
 
